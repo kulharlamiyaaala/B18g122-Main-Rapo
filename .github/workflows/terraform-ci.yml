@@ -1,0 +1,15 @@
+      - name: Terraform Format Check
+        working-directory: ./di-b18-infra
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Init
+        working-directory: ./di-b18-infra
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ./di-b18-infra
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: ./di-b18-infra
+        run: terraform plan
