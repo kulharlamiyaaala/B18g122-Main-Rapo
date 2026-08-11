@@ -46,5 +46,4 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ./environments/preprod
-        run: terraform planprod
         run: terraform plan
