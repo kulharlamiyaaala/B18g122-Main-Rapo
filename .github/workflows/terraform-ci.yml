@@ -1,11 +1,7 @@
-name: Terraform CI
+name: Terraform CD
 
 on:
   push:
-    branches:
-      - feature
-
-  pull_request:
     branches:
       - main
 
@@ -14,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: Terraform CI
+  terraform-cd:
+    name: Terraform CD
     runs-on: ubuntu-latest
 
     steps:
@@ -32,10 +28,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Terraform Format Check
-        working-directory: ./environments/preprod
-        run: terraform fmt -check -recursive
-
       - name: Terraform Init
         working-directory: ./environments/preprod
         run: terraform init
@@ -47,3 +39,7 @@ jobs:
       - name: Terraform Plan
         working-directory: ./environments/preprod
         run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: ./environments/preprod
+        run: terraform apply -auto-approve
