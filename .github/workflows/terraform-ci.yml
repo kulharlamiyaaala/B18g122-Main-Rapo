@@ -21,6 +21,17 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Verify Azure Client ID
+        env:
+          CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        run: |
+          if [ "$CLIENT_ID" = "5f0b38c6-5ff6-486f-bf5f-181aaabfd20d" ]; then
+            echo "AZURE_CLIENT_ID matches B18g122-GitHub-Terraform"
+          else
+            echo "AZURE_CLIENT_ID does NOT match B18g122-GitHub-Terraform"
+            exit 1
+          fi
+
       - name: Azure Login
         uses: azure/login@v2
         with:
