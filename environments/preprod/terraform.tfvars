@@ -1,18 +1,20 @@
 rgs = {
   rg1 = {
-    name     = "rg-chor-dev"
+    name     = "rg-chor-dev-rk01"
     location = "centralindia"
   }
+
   rg2 = {
-    name     = "rg-chor-dev-2"
+    name     = "rg-chor-dev-2-rk01"
     location = "centralindia"
   }
 }
+
 vnets = {
   vnet1 = {
-    name                = "vnet-chor-dev"
+    name                = "vnet-chor-dev-rk01"
     location            = "centralindia"
-    resource_group_name = "rg-chor-dev"
+    resource_group_name = "rg-chor-dev-rk01"
     address_space       = ["10.0.0.0/16"]
   }
 }
@@ -20,46 +22,51 @@ vnets = {
 subnets = {
   snet1 = {
     name                 = "frontend-subnet-dev"
-    resource_group_name  = "rg-chor-dev"
-    virtual_network_name = "vnet-chor-dev"
+    resource_group_name  = "rg-chor-dev-rk01"
+    virtual_network_name = "vnet-chor-dev-rk01"
     address_prefixes     = ["10.0.1.0/24"]
   }
+
   snet2 = {
     name                 = "backend-subnet-dev"
-    resource_group_name  = "rg-chor-dev"
-    virtual_network_name = "vnet-chor-dev"
+    resource_group_name  = "rg-chor-dev-rk01"
+    virtual_network_name = "vnet-chor-dev-rk01"
     address_prefixes     = ["10.0.2.0/24"]
   }
+
   snet3 = {
     name                 = "database-subnet-dev"
-    resource_group_name  = "rg-chor-dev"
-    virtual_network_name = "vnet-chor-dev"
+    resource_group_name  = "rg-chor-dev-rk01"
+    virtual_network_name = "vnet-chor-dev-rk01"
     address_prefixes     = ["10.0.3.0/24"]
   }
+
   snet4 = {
     name                 = "AzureBastionSubnet"
-    resource_group_name  = "rg-chor-dev"
-    virtual_network_name = "vnet-chor-dev"
+    resource_group_name  = "rg-chor-dev-rk01"
+    virtual_network_name = "vnet-chor-dev-rk01"
     address_prefixes     = ["10.0.4.0/26"]
   }
+
   snet5 = {
     name                 = "AppGatewaySubnet"
-    resource_group_name  = "rg-chor-dev"
-    virtual_network_name = "vnet-chor-dev"
+    resource_group_name  = "rg-chor-dev-rk01"
+    virtual_network_name = "vnet-chor-dev-rk01"
     address_prefixes     = ["10.0.5.0/24"]
   }
 }
 
 public_ips = {
   pip_bastion = {
-    public_ip_name      = "pip-bastion-dev"
-    resource_group_name = "rg-chor-dev"
+    public_ip_name      = "pip-bastion-dev-rk01"
+    resource_group_name = "rg-chor-dev-rk01"
     location            = "centralindia"
     allocation_method   = "Static"
   }
+
   pip_appgw = {
-    public_ip_name      = "pip-appgw-dev"
-    resource_group_name = "rg-chor-dev"
+    public_ip_name      = "pip-appgw-dev-rk01"
+    resource_group_name = "rg-chor-dev-rk01"
     location            = "centralindia"
     allocation_method   = "Static"
   }
@@ -67,82 +74,84 @@ public_ips = {
 
 vms = {
   frontend_1 = {
-    nic_name        = "frontend-vm-nic-1-dev"
+    nic_name        = "frontend-vm-nic-1-dev-rk01"
     location        = "centralindia"
-    rg_name         = "rg-chor-dev"
+    rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "frontend-subnet-dev"
-    nic_vnet_name   = "vnet-chor-dev"
-    vm_name         = "frontend-vm-1-dev"
+    nic_vnet_name   = "vnet-chor-dev-rk01"
+    vm_name         = "frontend-vm-1-dev-rk01"
     vm_size         = "Standard_B1s"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-123"
+    key_vault_name  = "kv-chor-dev-rk01-123"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
     image_sku       = "22_04-lts"
     image_version   = "latest"
   }
+
   frontend_2 = {
-    nic_name        = "frontend-vm-nic-2-dev"
+    nic_name        = "frontend-vm-nic-2-dev-rk01"
     location        = "centralindia"
-    rg_name         = "rg-chor-dev"
+    rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "frontend-subnet-dev"
-    nic_vnet_name   = "vnet-chor-dev"
-    vm_name         = "frontend-vm-2-dev"
+    nic_vnet_name   = "vnet-chor-dev-rk01"
+    vm_name         = "frontend-vm-2-dev-rk01"
     vm_size         = "Standard_B1s"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-123"
+    key_vault_name  = "kv-chor-dev-rk01-123"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
     image_sku       = "22_04-lts"
     image_version   = "latest"
   }
+
   backend_1 = {
-    nic_name        = "backend-vm-nic-1-dev"
+    nic_name        = "backend-vm-nic-1-dev-rk01"
     location        = "centralindia"
-    rg_name         = "rg-chor-dev"
+    rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "backend-subnet-dev"
-    nic_vnet_name   = "vnet-chor-dev"
-    vm_name         = "backend-vm-1-dev"
+    nic_vnet_name   = "vnet-chor-dev-rk01"
+    vm_name         = "backend-vm-1-dev-rk01"
     vm_size         = "Standard_B1s"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-123"
+    key_vault_name  = "kv-chor-dev-rk01-123"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
     image_sku       = "22_04-lts"
     image_version   = "latest"
   }
+
   backend_2 = {
-    nic_name        = "backend-vm-nic-2-dev"
+    nic_name        = "backend-vm-nic-2-dev-rk01"
     location        = "centralindia"
-    rg_name         = "rg-chor-dev"
+    rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "backend-subnet-dev"
-    nic_vnet_name   = "vnet-chor-dev"
-    vm_name         = "backend-vm-2-dev"
+    nic_vnet_name   = "vnet-chor-dev-rk01"
+    vm_name         = "backend-vm-2-dev-rk01"
     vm_size         = "Standard_B1s"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-123"
+    key_vault_name  = "kv-chor-dev-rk01-123"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
     image_sku       = "22_04-lts"
     image_version   = "latest"
   }
+
   database_1 = {
-    nic_name        = "database-vm-nic-dev"
+    nic_name        = "database-vm-nic-dev-rk01"
     location        = "centralindia"
-    rg_name         = "rg-chor-dev"
+    rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "database-subnet-dev"
-    nic_vnet_name   = "vnet-chor-dev"
-    vm_name         = "database-vm-dev"
+    nic_vnet_name   = "vnet-chor-dev-rk01"
+    vm_name         = "database-vm-dev-rk01"
     vm_size         = "Standard_B2s"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-123"
+    key_vault_name  = "kv-chor-dev-rk01-123"
     secret_name     = "admin-password"
-    image_publisher = "Canonical"
-    image_publisher = "Canonical"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
     image_sku       = "22_04-lts"
@@ -152,41 +161,41 @@ vms = {
 
 bastions = {
   bastion1 = {
-    name           = "bastion-dev"
+    name           = "bastion-dev-rk01"
     location       = "centralindia"
-    rg_name        = "rg-chor-dev"
+    rg_name        = "rg-chor-dev-rk01"
     subnet_name    = "AzureBastionSubnet"
-    vnet_name      = "vnet-chor-dev"
-    public_ip_name = "pip-bastion-dev"
+    vnet_name      = "vnet-chor-dev-rk01"
+    public_ip_name = "pip-bastion-dev-rk01"
   }
 }
 
 app_gateways = {
   appgw1 = {
-    name           = "appgw-dev"
+    name           = "appgw-dev-rk01"
     location       = "centralindia"
-    rg_name        = "rg-chor-dev"
+    rg_name        = "rg-chor-dev-rk01"
     subnet_name    = "AppGatewaySubnet"
-    vnet_name      = "vnet-chor-dev"
-    public_ip_name = "pip-appgw-dev"
+    vnet_name      = "vnet-chor-dev-rk01"
+    public_ip_name = "pip-appgw-dev-rk01"
   }
 }
 
 load_balancers = {
   lb1 = {
-    name        = "lb-backend-dev"
+    name        = "lb-backend-dev-rk01"
     location    = "centralindia"
-    rg_name     = "rg-chor-dev"
+    rg_name     = "rg-chor-dev-rk01"
     subnet_name = "backend-subnet-dev"
-    vnet_name   = "vnet-chor-dev"
+    vnet_name   = "vnet-chor-dev-rk01"
   }
 }
 
 key_vaults = {
   kv1 = {
-    name        = "kv-chor-dev-123"
+    name        = "kv-chor-dev-rk01-123"
     location    = "centralindia"
-    rg_name     = "rg-chor-dev"
+    rg_name     = "rg-chor-dev-rk01"
     secret_name = "admin-password"
   }
 }
