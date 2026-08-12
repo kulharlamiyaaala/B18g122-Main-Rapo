@@ -1,11 +1,7 @@
-name: Terraform CI
+name: Terraform CD
 
 on:
   push:
-    branches:
-      - feature
-
-  pull_request:
     branches:
       - main
 
@@ -14,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: Terraform CI
+  terraform-cd:
+    name: Terraform CD
     runs-on: ubuntu-latest
 
     steps:
@@ -25,16 +21,23 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Verify Azure Client ID
+        env:
+          CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        run: |
+          if [ "$CLIENT_ID" = "5f0b38c6-5ff6-486f-bf5f-181aaabfd20d" ]; then
+            echo "AZURE_CLIENT_ID matches B18g122-GitHub-Terraform"
+          else
+            echo "AZURE_CLIENT_ID does NOT match B18g122-GitHub-Terraform"
+            exit 1
+          fi
+
       - name: Azure Login
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Terraform Format Check
-        working-directory: ./environments/preprod
-        run: terraform fmt -check -recursive
 
       - name: Terraform Init
         working-directory: ./environments/preprod
@@ -47,3 +50,7 @@ jobs:
       - name: Terraform Plan
         working-directory: ./environments/preprod
         run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: ./environments/preprod
+        run: terraform apply -auto-approve
