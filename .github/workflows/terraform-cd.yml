@@ -152,10 +152,10 @@ jobs:
         working-directory: ./environments/${{ matrix.environment }}
         run: |
           if [ "${{ matrix.environment }}" = "prod" ]; then
-            terraform import module.resource_group.azurerm_resource_group.resource_group[\"rg1\"] /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-prod || true
+            terraform import 'module.resource_group.azurerm_resource_group.resource_group["rg1"]' /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-prod || true
           else
-            terraform import module.resource_group.azurerm_resource_group.resource_group[\"rg1\"] /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-dev-rk01 || true
-            terraform import module.resource_group.azurerm_resource_group.resource_group[\"rg2\"] /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-dev-2-rk01 || true
+            terraform import 'module.resource_group.azurerm_resource_group.resource_group["rg1"]' /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-dev-rk01 || true
+            terraform import 'module.resource_group.azurerm_resource_group.resource_group["rg2"]' /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-dev-2-rk01 || true
           fi
 
       - name: Terraform Apply
