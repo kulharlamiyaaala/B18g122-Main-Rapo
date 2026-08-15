@@ -131,11 +131,12 @@ jobs:
         with:
           inlineScript: |
             if [ "${{ matrix.environment }}" = "prod" ]; then
-              az group delete --name "rg-chor-prod" --yes --no-wait || true
+              az group delete --name "rg-chor-prod" --yes || true
             else
-              az group delete --name "rg-chor-dev-rk01" --yes --no-wait || true
-              az group delete --name "rg-chor-dev-2-rk01" --yes --no-wait || true
+              az group delete --name "rg-chor-dev-rk01" --yes || true
+              az group delete --name "rg-chor-dev-2-rk01" --yes || true
             fi
+
 
       - name: Refresh Azure Login Token
         uses: azure/login@v2
