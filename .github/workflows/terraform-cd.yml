@@ -131,11 +131,14 @@ jobs:
         with:
           inlineScript: |
             if [ "${{ matrix.environment }}" = "prod" ]; then
+              az keyvault purge --name "kv-chor-prod-123" || true
               az group delete --name "rg-chor-prod" --yes || true
             else
+              az keyvault purge --name "kv-chor-dev-rk01-123" || true
               az group delete --name "rg-chor-dev-rk01" --yes || true
               az group delete --name "rg-chor-dev-2-rk01" --yes || true
             fi
+
 
 
       - name: Refresh Azure Login Token

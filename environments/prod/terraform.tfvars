@@ -48,12 +48,6 @@ subnets = {
 }
 
 public_ips = {
-  pip_bastion = {
-    public_ip_name      = "pip-bastion-prod"
-    resource_group_name = "rg-chor-prod"
-    location            = "centralindia"
-    allocation_method   = "Static"
-  }
   pip_appgw = {
     public_ip_name      = "pip-appgw-prod"
     resource_group_name = "rg-chor-prod"
@@ -63,6 +57,7 @@ public_ips = {
 }
 
 vms = {
+
   frontend_1 = {
     nic_name        = "frontend-vm-nic-1-prod"
     location        = "centralindia"
@@ -145,16 +140,8 @@ vms = {
   }
 }
 
-bastions = {
-  bastion1 = {
-    name           = "bastion-prod"
-    location       = "centralindia"
-    rg_name        = "rg-chor-prod"
-    subnet_name    = "AzureBastionSubnet"
-    vnet_name      = "vnet-chor-prod"
-    public_ip_name = "pip-bastion-prod"
-  }
-}
+bastions = {}
+
 
 app_gateways = {
   appgw1 = {
