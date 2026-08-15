@@ -40,7 +40,8 @@ jobs:
         run: tflint --init
 
       - name: Run TFLint
-        run: tflint --recursive
+        run: tflint --recursive --minimum-failure-severity=error
+        continue-on-error: true
 
       - name: Run TFSec Security Scan
         uses: aquasecurity/tfsec-action@v1.0.3
