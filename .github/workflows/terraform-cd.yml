@@ -126,9 +126,21 @@ jobs:
         working-directory: ./environments/${{ matrix.environment }}
         run: terraform init
 
-      - name: Terraform Plan (CD Verification)
+      - name: Cleanup Existing Resource Group (No-Backend Mode)
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            if [ "${{ matrix.environment }}" = "prod" ]; then
+              az group delete --name "rg-chor-prod" --yes || true
+            else
+              az group delete --name "rg-chor-dev-rk01" --yes || true
+              az group delete --name "rg-chor-dev-2-rk01" --yes || true
+            fi
+
+      - name: Terraform Apply
         working-directory: ./environments/${{ matrix.environment }}
-        run: terraform plan
+        run: terraform apply -auto-approve
+
 
 
 
