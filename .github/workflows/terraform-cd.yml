@@ -126,37 +126,15 @@ jobs:
         working-directory: ./environments/${{ matrix.environment }}
         run: terraform init
 
-      - name: Azure Resource Group Setup & Quota Cleanup
+      - name: Purge Soft-Deleted Key Vaults
         uses: azure/cli@v2
         with:
           inlineScript: |
             if [ "${{ matrix.environment }}" = "prod" ]; then
-              az group create --name "rg-chor-prod" --location "centralindia"
-              az keyvault purge --name "kv-chor-prod-123" || true
+              az keyvault purge --name "kv-chor-prod-123" 2>/dev/null || true
             else
-              az group create --name "rg-chor-dev-rk01" --location "centralindia"
-              az group create --name "rg-chor-dev-2-rk01" --location "centralindia"
-              az keyvault purge --name "kv-chor-dev-rk01-123" || true
+              az keyvault purge --name "kv-chor-dev-rk01-123" 2>/dev/null || true
             fi
-            # Clean orphan unattached public IPs to free up subscription quota
-            az network public-ip list --query "[?ipConfiguration==null].id" -o tsv | xargs -r az resource delete --ids || true
-
-      - name: Refresh Azure Login Token
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Import Existing Resource Groups into State
-        working-directory: ./environments/${{ matrix.environment }}
-        run: |
-          if [ "${{ matrix.environment }}" = "prod" ]; then
-            terraform import 'module.resource_group.azurerm_resource_group.resource_group["rg1"]' /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-prod || true
-          else
-            terraform import 'module.resource_group.azurerm_resource_group.resource_group["rg1"]' /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-dev-rk01 || true
-            terraform import 'module.resource_group.azurerm_resource_group.resource_group["rg2"]' /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/rg-chor-dev-2-rk01 || true
-          fi
 
       - name: Terraform Apply
         working-directory: ./environments/${{ matrix.environment }}
