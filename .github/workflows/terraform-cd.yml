@@ -54,6 +54,8 @@ jobs:
     needs: security-and-lint
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
+      max-parallel: 1
       matrix:
         environment: [preprod, prod]
     steps:
@@ -102,6 +104,8 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
+      max-parallel: 1
       matrix:
         environment: [preprod, prod]
     steps:
