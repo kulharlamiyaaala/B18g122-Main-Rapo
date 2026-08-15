@@ -126,8 +126,9 @@ jobs:
         working-directory: ./environments/${{ matrix.environment }}
         run: terraform init
 
-      - name: Terraform Apply
+      - name: Terraform Plan (CD Verification)
         working-directory: ./environments/${{ matrix.environment }}
-        run: terraform apply -auto-approve
+        run: terraform plan
+
 
 
