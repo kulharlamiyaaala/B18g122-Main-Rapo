@@ -131,15 +131,23 @@ jobs:
         with:
           inlineScript: |
             if [ "${{ matrix.environment }}" = "prod" ]; then
-              az group delete --name "rg-chor-prod" --yes || true
+              az group delete --name "rg-chor-prod" --yes --no-wait || true
             else
-              az group delete --name "rg-chor-dev-rk01" --yes || true
-              az group delete --name "rg-chor-dev-2-rk01" --yes || true
+              az group delete --name "rg-chor-dev-rk01" --yes --no-wait || true
+              az group delete --name "rg-chor-dev-2-rk01" --yes --no-wait || true
             fi
+
+      - name: Refresh Azure Login Token
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Apply
         working-directory: ./environments/${{ matrix.environment }}
         run: terraform apply -auto-approve
+
 
 
 
