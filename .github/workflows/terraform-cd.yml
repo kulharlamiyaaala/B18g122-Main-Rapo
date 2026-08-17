@@ -133,9 +133,9 @@ jobs:
         with:
           inlineScript: |
             if [ "${{ matrix.environment }}" = "prod" ]; then
-              az keyvault purge --name "kv-chor-prod-123" 2>/dev/null || true
+              az keyvault purge --name "kv-chor-prod-b18g" 2>/dev/null || true
             else
-              az keyvault purge --name "kv-chor-dev-rk01-123" 2>/dev/null || true
+              az keyvault purge --name "kv-chor-dev-rk01-b18g" 2>/dev/null || true
             fi
 
       - name: Terraform Apply
