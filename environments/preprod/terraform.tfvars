@@ -1,19 +1,19 @@
 rgs = {
   rg1 = {
     name     = "rg-chor-dev-rk01"
-    location = "centralindia"
+    location = "eastus"
   }
 
   rg2 = {
     name     = "rg-chor-dev-2-rk01"
-    location = "centralindia"
+    location = "eastus"
   }
 }
 
 vnets = {
   vnet1 = {
     name                = "vnet-chor-dev-rk01"
-    location            = "centralindia"
+    location            = "eastus"
     resource_group_name = "rg-chor-dev-rk01"
     address_space       = ["10.0.0.0/16"]
   }
@@ -60,14 +60,14 @@ public_ips = {
   pip_bastion = {
     public_ip_name      = "pip-bastion-dev-rk01"
     resource_group_name = "rg-chor-dev-rk01"
-    location            = "centralindia"
+    location            = "eastus"
     allocation_method   = "Static"
   }
 
   pip_appgw = {
     public_ip_name      = "pip-appgw-dev-rk01"
     resource_group_name = "rg-chor-dev-rk01"
-    location            = "centralindia"
+    location            = "eastus"
     allocation_method   = "Static"
   }
 }
@@ -75,14 +75,14 @@ public_ips = {
 vms = {
   frontend_1 = {
     nic_name        = "frontend-vm-nic-1-dev-rk01"
-    location        = "centralindia"
+    location        = "eastus"
     rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "frontend-subnet-dev"
     nic_vnet_name   = "vnet-chor-dev-rk01"
     vm_name         = "frontend-vm-1-dev-rk01"
     vm_size         = "Standard_A1_v2"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-rk01-b18g"
+    key_vault_name  = "kv-chor-dev-rk01-ea"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
@@ -92,14 +92,14 @@ vms = {
 
   backend_1 = {
     nic_name        = "backend-vm-nic-1-dev-rk01"
-    location        = "centralindia"
+    location        = "eastus"
     rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "backend-subnet-dev"
     nic_vnet_name   = "vnet-chor-dev-rk01"
     vm_name         = "backend-vm-1-dev-rk01"
     vm_size         = "Standard_A1_v2"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-rk01-b18g"
+    key_vault_name  = "kv-chor-dev-rk01-ea"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
@@ -109,14 +109,14 @@ vms = {
 
   database_1 = {
     nic_name        = "database-vm-nic-dev-rk01"
-    location        = "centralindia"
+    location        = "eastus"
     rg_name         = "rg-chor-dev-rk01"
     nic_subnet_name = "database-subnet-dev"
     nic_vnet_name   = "vnet-chor-dev-rk01"
     vm_name         = "database-vm-dev-rk01"
     vm_size         = "Standard_A1_v2"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-dev-rk01-b18g"
+    key_vault_name  = "kv-chor-dev-rk01-ea"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
@@ -128,7 +128,7 @@ vms = {
 bastions = {
   bastion1 = {
     name           = "bastion-dev-rk01"
-    location       = "centralindia"
+    location       = "eastus"
     rg_name        = "rg-chor-dev-rk01"
     subnet_name    = "AzureBastionSubnet"
     vnet_name      = "vnet-chor-dev-rk01"
