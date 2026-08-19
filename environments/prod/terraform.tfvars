@@ -1,14 +1,14 @@
 rgs = {
   rg1 = {
     name     = "rg-chor-prod"
-    location = "centralindia"
+    location = "eastus"
   }
 }
 
 vnets = {
   vnet1 = {
     name                = "vnet-chor-prod"
-    location            = "centralindia"
+    location            = "eastus"
     resource_group_name = "rg-chor-prod"
     address_space       = ["10.0.0.0/16"]
   }
@@ -48,16 +48,10 @@ subnets = {
 }
 
 public_ips = {
-  pip_bastion = {
-    public_ip_name      = "pip-bastion-prod"
-    resource_group_name = "rg-chor-prod"
-    location            = "centralindia"
-    allocation_method   = "Static"
-  }
   pip_appgw = {
     public_ip_name      = "pip-appgw-prod"
     resource_group_name = "rg-chor-prod"
-    location            = "centralindia"
+    location            = "eastus"
     allocation_method   = "Static"
   }
 }
@@ -65,30 +59,14 @@ public_ips = {
 vms = {
   frontend_1 = {
     nic_name        = "frontend-vm-nic-1-prod"
-    location        = "centralindia"
+    location        = "eastus"
     rg_name         = "rg-chor-prod"
     nic_subnet_name = "frontend-subnet-prod"
     nic_vnet_name   = "vnet-chor-prod"
     vm_name         = "frontend-vm-1-prod"
-    vm_size         = "Standard_B1s"
+    vm_size         = "Standard_A1_v2"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-prod-123"
-    secret_name     = "admin-password"
-    image_publisher = "Canonical"
-    image_offer     = "0001-com-ubuntu-server-jammy"
-    image_sku       = "22_04-lts"
-    image_version   = "latest"
-  }
-  frontend_2 = {
-    nic_name        = "frontend-vm-nic-2-prod"
-    location        = "centralindia"
-    rg_name         = "rg-chor-prod"
-    nic_subnet_name = "frontend-subnet-prod"
-    nic_vnet_name   = "vnet-chor-prod"
-    vm_name         = "frontend-vm-2-prod"
-    vm_size         = "Standard_B1s"
-    admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-prod-123"
+    key_vault_name  = "kv-chor-prod-ea"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
@@ -97,30 +75,14 @@ vms = {
   }
   backend_1 = {
     nic_name        = "backend-vm-nic-1-prod"
-    location        = "centralindia"
+    location        = "eastus"
     rg_name         = "rg-chor-prod"
     nic_subnet_name = "backend-subnet-prod"
     nic_vnet_name   = "vnet-chor-prod"
     vm_name         = "backend-vm-1-prod"
-    vm_size         = "Standard_B1s"
+    vm_size         = "Standard_A1_v2"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-prod-123"
-    secret_name     = "admin-password"
-    image_publisher = "Canonical"
-    image_offer     = "0001-com-ubuntu-server-jammy"
-    image_sku       = "22_04-lts"
-    image_version   = "latest"
-  }
-  backend_2 = {
-    nic_name        = "backend-vm-nic-2-prod"
-    location        = "centralindia"
-    rg_name         = "rg-chor-prod"
-    nic_subnet_name = "backend-subnet-prod"
-    nic_vnet_name   = "vnet-chor-prod"
-    vm_name         = "backend-vm-2-prod"
-    vm_size         = "Standard_B1s"
-    admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-prod-123"
+    key_vault_name  = "kv-chor-prod-ea"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
@@ -129,14 +91,14 @@ vms = {
   }
   database_1 = {
     nic_name        = "database-vm-nic-prod"
-    location        = "centralindia"
+    location        = "eastus"
     rg_name         = "rg-chor-prod"
     nic_subnet_name = "database-subnet-prod"
     nic_vnet_name   = "vnet-chor-prod"
     vm_name         = "database-vm-prod"
-    vm_size         = "Standard_B2s"
+    vm_size         = "Standard_A1_v2"
     admin_username  = "devopsadmin"
-    key_vault_name  = "kv-chor-prod-123"
+    key_vault_name  = "kv-chor-prod-ea"
     secret_name     = "admin-password"
     image_publisher = "Canonical"
     image_offer     = "0001-com-ubuntu-server-jammy"
@@ -145,21 +107,12 @@ vms = {
   }
 }
 
-bastions = {
-  bastion1 = {
-    name           = "bastion-prod"
-    location       = "centralindia"
-    rg_name        = "rg-chor-prod"
-    subnet_name    = "AzureBastionSubnet"
-    vnet_name      = "vnet-chor-prod"
-    public_ip_name = "pip-bastion-prod"
-  }
-}
+bastions = {}
 
 app_gateways = {
   appgw1 = {
     name           = "appgw-prod"
-    location       = "centralindia"
+    location       = "eastus"
     rg_name        = "rg-chor-prod"
     subnet_name    = "AppGatewaySubnet"
     vnet_name      = "vnet-chor-prod"
@@ -179,7 +132,7 @@ load_balancers = {
 
 key_vaults = {
   kv1 = {
-    name        = "kv-chor-prod-123"
+    name        = "kv-chor-prod-b18g"
     location    = "centralindia"
     rg_name     = "rg-chor-prod"
     secret_name = "admin-password"

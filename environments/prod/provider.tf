@@ -11,10 +11,10 @@ terraform {
     storage_account_name = "sttfstateb18g122"
     container_name       = "prod-tfstate"
     key                  = "prod.terraform.tfstate"
+    use_oidc             = true
   }
 }
 
 provider "azurerm" {
   features {}
 }
-

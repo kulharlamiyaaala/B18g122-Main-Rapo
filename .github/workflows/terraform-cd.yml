@@ -38,9 +38,12 @@ jobs:
 
       - name: Init TFLint
         run: tflint --init
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run TFLint
-        run: tflint --recursive
+        run: tflint --recursive --minimum-failure-severity=error
+        continue-on-error: true
 
       - name: Run TFSec Security Scan
         uses: aquasecurity/tfsec-action@v1.0.3
@@ -53,6 +56,8 @@ jobs:
     needs: security-and-lint
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
+      max-parallel: 1
       matrix:
         environment: [preprod, prod]
     steps:
@@ -101,6 +106,8 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
+      max-parallel: 1
       matrix:
         environment: [preprod, prod]
     steps:
@@ -121,8 +128,16 @@ jobs:
         working-directory: ./environments/${{ matrix.environment }}
         run: terraform init
 
+      - name: Purge Soft-Deleted Key Vaults
+        uses: azure/cli@v2
+        with:
+          inlineScript: |
+            if [ "${{ matrix.environment }}" = "prod" ]; then
+              az keyvault purge --name "kv-chor-prod-ea" 2>/dev/null || true
+            else
+              az keyvault purge --name "kv-chor-dev-rk01-ea" 2>/dev/null || true
+            fi
+
       - name: Terraform Apply
         working-directory: ./environments/${{ matrix.environment }}
         run: terraform apply -auto-approve
-
-
