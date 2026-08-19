@@ -123,7 +123,7 @@ app_gateways = {
 load_balancers = {
   lb1 = {
     name        = "lb-backend-prod"
-    location    = "centralindia"
+    location    = "eastus"
     rg_name     = "rg-chor-prod"
     subnet_name = "backend-subnet-prod"
     vnet_name   = "vnet-chor-prod"
@@ -132,8 +132,8 @@ load_balancers = {
 
 key_vaults = {
   kv1 = {
-    name        = "kv-chor-prod-b18g"
-    location    = "centralindia"
+    name        = "kv-chor-prod-ea"
+    location    = "eastus"
     rg_name     = "rg-chor-prod"
     secret_name = "admin-password"
   }
